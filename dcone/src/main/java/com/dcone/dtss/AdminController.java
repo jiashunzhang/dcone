@@ -5,9 +5,12 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import com.dcone.dtss.dao.LuckyDAO;
+import com.dcone.dtss.dao.LuckyNumberRecordDAO;
 import com.dcone.dtss.dao.WalletDAO;
+import com.dcone.dtss.model.LuckyNumerRecord;
 import com.dcone.dtss.model.dc_wallet;
 
 import MyThead.LuckyNumberThread;
@@ -44,6 +47,15 @@ public class AdminController {
 		t.start();
 		return "luckyon";
 	}
+	
+	@RequestMapping("/viewrecord")
+	public String viewRecord(Model model) {
+		List<LuckyNumerRecord> records = LuckyNumberRecordDAO.getAllRecords();
+		model.addAttribute("records", records);
+		return "view_record";
+	}
+	
+	
 	
 	
 }
