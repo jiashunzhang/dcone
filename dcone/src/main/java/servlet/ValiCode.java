@@ -6,6 +6,10 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.springframework.context.ApplicationContext;
+import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.web.context.support.WebApplicationContextUtils;
+
 /**
  * Servlet implementation class ValiCode
  */
@@ -26,7 +30,11 @@ public class ValiCode extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
+		ApplicationContext ctx = WebApplicationContextUtils.getWebApplicationContext(this.getServletContext());
+		JdbcTemplate jdbcTemplate = ctx.getBean("jdbcTemplate", JdbcTemplate.class);
+		
 		response.getWriter().append("Served at: ").append(request.getContextPath());
+		response.getWriter().append(jdbcTemplate.toString());
 	}
 
 	/**
