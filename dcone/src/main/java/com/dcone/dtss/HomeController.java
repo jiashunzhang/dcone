@@ -8,14 +8,21 @@ import java.util.Locale;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.apache.ibatis.session.SqlSession;
+import org.apache.ibatis.session.SqlSessionFactory;
+import org.apache.ibatis.session.SqlSessionFactoryBuilder;
+import org.mybatis.spring.SqlSessionFactoryBean;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.commons.CommonsMultipartFile;
+
+import com.dcone.dtss.model.dc_user;
 
 /**
  * Handles requests for the application home page.
@@ -24,7 +31,8 @@ import org.springframework.web.multipart.commons.CommonsMultipartFile;
 public class HomeController {
 	
 	private static final Logger logger = LoggerFactory.getLogger(HomeController.class);
-	
+	@Autowired
+	SqlSessionFactoryBean sqlSessionFactory;
 	/**
 	 * Simply selects the home view to render by returning its name.
 	 */
@@ -65,5 +73,22 @@ public class HomeController {
 		
 		return "list";
 	}
-	
+	@RequestMapping("/mybatis") 
+	public String batisTest() {
+		SqlSession sqlSession=null;
+		logger.info(sqlSessionFactory.toString());
+		try {
+			SqlSessionFactory factory = sqlSessionFactory.getObject();
+			sqlSession =  factory.openSession();
+			logger.info(sqlSession.toString());
+			dc_user user =  sqlSession.selectOne("com.dcone.dtss.model.UserMapper.selectUserByID", 1);
+			logger.info(user.toString());
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			sqlSession.close();
+		}
+		return "list";
+	}
 }
