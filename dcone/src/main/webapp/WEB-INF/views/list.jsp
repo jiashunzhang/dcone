@@ -7,6 +7,6 @@
 <title>Insert title here</title>
 </head>
 <body>
-上传成功${count}个文件
+上传成功${count}个文件到${path}
 </body>
 </html>
