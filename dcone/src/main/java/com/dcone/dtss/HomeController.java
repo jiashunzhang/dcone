@@ -1,8 +1,12 @@
 package com.dcone.dtss;
 
+import java.io.File;
+import java.io.IOException;
 import java.text.DateFormat;
 import java.util.Date;
 import java.util.Locale;
+
+import javax.servlet.http.HttpServletRequest;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -39,9 +43,26 @@ public class HomeController {
 	}
 	
 	@RequestMapping("/upload")
-	public String upload(@RequestParam(value = "file", required = false) CommonsMultipartFile[] files,Model model) {
+	public String upload(@RequestParam(value = "file", required = false) CommonsMultipartFile[] files,Model model,HttpServletRequest request) {
 		int i = files.length;
 		model.addAttribute("count", i);
+		String dest = request.getSession().getServletContext().getRealPath("/upload/");
+		for(CommonsMultipartFile temp : files) {
+			long l = System.currentTimeMillis();
+			try {
+				if(!temp.isEmpty())
+					temp.transferTo(new File(dest + l+temp.getOriginalFilename()));
+			} catch (IllegalStateException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		
+		model.addAttribute("path", dest);
+		
 		return "list";
 	}
 	
