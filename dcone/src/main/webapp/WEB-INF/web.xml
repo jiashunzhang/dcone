@@ -18,7 +18,7 @@
     <description></description>
     <display-name>ValiCode</display-name>
     <servlet-name>ValiCode</servlet-name>
-    <servlet-class>servlet.ValiCode</servlet-class>
+    <servlet-class>org.dcone.servlet.ValiCode</servlet-class>
   </servlet>
   <servlet-mapping>
     <servlet-name>ValiCode</servlet-name>

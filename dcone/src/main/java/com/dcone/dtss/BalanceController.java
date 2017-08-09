@@ -25,8 +25,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import com.dcone.dtss.dao.WalletDAO;
 import com.dcone.dtss.model.dc_user;
 import com.dcone.dtss.model.dc_wallet;
-
-import form.WalletForm;
+import com.dcone.form.WalletForm;
 
 @Controller
 public class BalanceController {

@@ -1,4 +1,4 @@
-package form;
+package com.dcone.form;
 
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
