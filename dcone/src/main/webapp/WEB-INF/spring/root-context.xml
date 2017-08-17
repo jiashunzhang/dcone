@@ -22,7 +22,6 @@
    </bean>  
    <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">  
         <property name="dataSource" ref="dataSource" />  
-        <!-- 自动扫描mapping.xml文件 -->  
         <property name="mapperLocations" value="classpath:com/dcone/dtss/model/*.xml"></property>  
     </bean>  
   
