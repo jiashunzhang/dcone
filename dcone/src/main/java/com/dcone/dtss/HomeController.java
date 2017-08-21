@@ -97,8 +97,9 @@ public class HomeController {
 		}
 		return "list";
 	}
-	@RequestMapping("/json2.json")
+
 	@ResponseBody
+	@RequestMapping("/jsondemo")
 	public dc_user getUser() {
 		dc_user user= new dc_user();
 		user.setItcode("00001");
